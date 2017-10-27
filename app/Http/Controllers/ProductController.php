@@ -24,6 +24,24 @@ class ProductController extends Controller
         return redirect()->route('shop.index');
     }
 
+    public function getReduceByOne($id){
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->reduceByOne($id);
+
+        Session::put('cart', $cart);
+        return redirect()->route('shop.cart');
+    }
+
+    public function getRemoveItem($id){
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->removeItem($id);
+
+        Session::put('cart', $cart);
+        return redirect()->route('shop.cart');
+    }
+
     public function getCart(){
         if(!Session::has('cart')){
             return view('shop.cart');
@@ -44,5 +62,14 @@ class ProductController extends Controller
         $cart = new Cart($oldCart);
         $total = $cart->totalPrice;
         return view('shop.checkout', ['total' => $total]);
+    }
+    
+    public function postCheckout(Request $request){
+        if(!Session::has('cart')){
+            
+        }
+        $this->validate($request, [
+
+        ]);
     }
 }
