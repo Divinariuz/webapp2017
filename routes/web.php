@@ -70,9 +70,32 @@ Route::group(['prefix' => 'user'], function(){
             'uses' => 'UserController@getProfile',
             'as' => 'user.profile'
         ]);
+
         Route::get('/logout', [
             'uses' => 'UserController@getLogout',
             'as' => 'user.logout'
         ]);
+
+        Route::group(['middleware' => 'admin'], function(){
+            Route::get('/admin/users', [
+                'uses' => 'AdminController@getUsers',
+                'as' => 'admin.users'
+            ]);
+
+            Route::get('/admin/users/edit/{id}', [
+                'uses' => 'AdminController@editUser',
+                'as' => 'admin.editUser'
+            ]);
+
+            Route::post('/admin/users/update/{id}', [
+                'uses' => 'AdminController@updateUser',
+                'as' => 'admin.updateUser'
+            ]);
+
+            Route::get('/admin/users/delete/{id}', [
+                'uses' => 'AdminController@deleteUser',
+                'as' => 'admin.deleteUser'
+            ]);
+        });
     });
 });

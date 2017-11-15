@@ -18,18 +18,31 @@
                         <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart
                         <span class="badge">{{ Session::has('cart') ? Session::get('cart')->totalQty : '0' }}</span>
                     </a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i> User Management <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        @if(Auth::check())
+                @if(Auth::check())
+                @if(Auth::user()->admin_flag == True)
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i> Admin Menu <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ route('admin.users') }}">User Management</a></li>
+                        </ul>
+                    </li>
+                @endif
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i> User Management <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
                             <li><a href="{{ route('user.profile') }}">User Profile</a></li>
                             <li><a href="{{ route('user.logout') }}">Logout</a></li>
-                        @else
+                        </ul>
+                    </li>
+                @else
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i> User Management <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
                             <li><a href="{{ route('user.signup') }}">Signup</a></li>
                             <li><a href="{{ route('user.signin') }}">Signin</a></li>
-                        @endif
-                    </ul>
-                </li>
+                        </ul>
+                    </li>
+                @endif
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

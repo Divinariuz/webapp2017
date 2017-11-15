@@ -1,9 +1,5 @@
 @extends('layouts.master')
 
-@section('title')
-    SFP ONLY SHOP
-@endsection
-
 @section('content')
     @if(Session::has('cart'))
         <div class="row">

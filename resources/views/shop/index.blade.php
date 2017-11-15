@@ -1,9 +1,5 @@
 @extends('layouts.master')
 
-@section('title')
-    SFP ONLY SHOP
-@endsection
-
 @section('content')
     @foreach($products->chunk(3) as $productChunk)
         <div class="row">

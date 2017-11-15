@@ -1,9 +1,5 @@
 @extends('layouts.master')
 
-@section('title')
-    SFP ONLY SHOP
-@endsection
-
 @section('content')
     <div class="row">
         <div class="col-sm-6 col-md-4 col-md-offset-4 col-sm-offset-3">
