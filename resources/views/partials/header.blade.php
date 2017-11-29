@@ -8,7 +8,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ route('shop.index') }}">ジェンキン寿</a>
+            <a class="navbar-brand" href="{{ route('shop.index') }}">ジェンキン寿司</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
