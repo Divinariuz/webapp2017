@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Product;
 use Illuminate\Http\Request;
 use App\User;
 
@@ -31,6 +32,50 @@ class AdminController extends Controller
     public function deleteUser($id){
         $user = User::findOrFail($id);
         $user->delete();
+        \Session::flash('flash_message', 'User successfully deleted!');
         return redirect()->route('admin.users');
+    }
+
+    public function getProducts(){
+        $products = Product::all();
+        return view('admin.products', ['products' => $products]);
+    }
+
+    public function getCreateProduct(){
+        return view('admin.create_product');
+    }
+
+    public function postCreateProduct(Request $request){
+        $product = new Product();
+        $product->title = $request->title;
+        $product->description = $request->description;
+        $product->price = $request->price;
+        $product->imagePath = $request->imagePath;
+        $product->save();
+        \Session::flash('flash_message', 'Product successfully created!');
+        return redirect()->route('admin.products');
+    }
+
+    public function editProduct($product_id){
+        $product = Product::findOrFail($product_id);
+        return view('admin.edit_product', compact('product'));
+    }
+
+    public function updateProduct($product_id, Request $request){
+        $product = Product::findOrFail($product_id);
+        $product->title = $request->title;
+        $product->description = $request->description;
+        $product->price = $request->price;
+        $product->imagePath = $request->imagePath;
+        $product->save();
+        \Session::flash('flash_message', 'Product successfully edited!');
+        return redirect()->route('admin.products');
+    }
+
+    public function deleteProduct($product_id){
+        $product = Product::findOrFail($product_id);
+        $product->delete();
+        \Session::flash('flash_message', 'Product successfully deleted!');
+        return redirect()->route('admin.products');
     }
 }

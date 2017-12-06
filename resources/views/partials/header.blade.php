@@ -24,6 +24,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i> Admin Menu <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="{{ route('admin.users') }}">User Management</a></li>
+                            <li><a href="{{ route('admin.products') }}">Product Management</a></li>
                         </ul>
                     </li>
                 @endif
