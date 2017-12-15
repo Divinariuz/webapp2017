@@ -1,50 +1,75 @@
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="{{ route('shop.index') }}">SFP STORE</a>
-        </div>
+<style>
+    .dropdown-content{
+        width: 300px !important
+    }
+</style>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="{{ route('shop.cart') }}">
+@if(Auth::check())
+    @if(Auth::user()->admin_flag == True)
+        <!-- Dropdown Structure -->
+        <ul id="dd_admin" class="dropdown-content">
+            <li>
+                <a href="{{ route('admin.users') }}">User Management</a>
+            </li>
+            <li>
+                <a href="{{ route('admin.products') }}">Product Management</a>
+            </li>
+        </ul>
+    @endif
+    <!-- Dropdown Structure -->
+    <ul id="dd_user" class="dropdown-content">
+        <li>
+            <a href="{{ route('user.profile') }}">User Profile</a>
+        </li>
+        <li>
+            <a href="{{ route('user.logout') }}">Logout</a>
+        </li>
+    </ul>
+@else
+    <!-- Dropdown Structure -->
+    <ul id="dd_guest" class="dropdown-content">
+        <li>
+            <a href="{{ route('user.signup') }}">Signup</a>
+        </li>
+        <li>
+            <a href="{{ route('user.signin') }}">Signin</a>
+        </li>
+    </ul>
+@endif
+
+<nav class="blue darken-4">
+    <div class="nav-wrapper container">
+        <a href="{{ route('shop.index') }}" class="brand-logo">SFP STORE</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li>
+                    <a href="{{ route('shop.cart') }}">
                         <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart
-                        <span class="badge">{{ Session::has('cart') ? Session::get('cart')->totalQty : '0' }}</span>
-                    </a></li>
+                        <span class="new badge" data-badge-caption="">{{ Session::has('cart') ? Session::get('cart')->totalQty : '0' }}</span>
+                    </a>
+                </li>
                 @if(Auth::check())
-                @if(Auth::user()->admin_flag == True)
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i> Admin Menu <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="{{ route('admin.users') }}">User Management</a></li>
-                            <li><a href="{{ route('admin.products') }}">Product Management</a></li>
-                        </ul>
-                    </li>
-                @endif
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i> User Management <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="{{ route('user.profile') }}">User Profile</a></li>
-                            <li><a href="{{ route('user.logout') }}">Logout</a></li>
-                        </ul>
+                    @if(Auth::user()->admin_flag == True)
+                        <!-- Dropdown Trigger -->
+                        <li>
+                            <a class="dropdown-button" href="#admin" data-activates="dd_admin" data-beloworigin="true">Admin Menu
+                                <i class="material-icons right">arrow_drop_down</i>
+                            </a>
+                        </li>
+                    @endif
+                    <!-- Dropdown Trigger -->
+                    <li>
+                        <a class="dropdown-button" href="#user" data-activates="dd_user" data-beloworigin="true">User Menu
+                            <i class="material-icons right">arrow_drop_down</i>
+                        </a>
                     </li>
                 @else
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i> User Management <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="{{ route('user.signup') }}">Signup</a></li>
-                            <li><a href="{{ route('user.signin') }}">Signin</a></li>
-                        </ul>
+                    <!-- Dropdown Trigger -->
+                    <li>
+                        <a class="dropdown-button" href="#guest" data-activates="dd_guest" data-beloworigin="true">User Menu
+                            <i class="material-icons right">arrow_drop_down</i>
+                        </a>
                     </li>
                 @endif
             </ul>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
+        </div>
 </nav>

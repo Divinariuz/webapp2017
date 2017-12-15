@@ -4,19 +4,22 @@
     @foreach($products->chunk(3) as $productChunk)
         <div class="row">
             @foreach($productChunk as $product)
-            <div class="col-sm-6 col-md-4">
-                <div class="thumbnail">
-                    <img src="{{ $product->imagePath }}" alt="image" class="img-responsive">
-                    <div class="caption">
-                        <h3>{{ $product->title }}</h3>
-                        <p class="description">{{ $product->description }}</p>
-                        <div class="clearfix">
-                            <div class="pull-left price">${{ $product->price }}</div>
-                            <a href="{{ route('shop.addToCart', ['id' => $product->id]) }}" class="btn btn-success pull-right" role="button">Add to Cart</a>
+                <div class="col s12 m4">
+                    <div class="card hoverable">
+                        <div class="card-image">
+                            <img src="{{ $product->imagePath }}">
                         </div>
+                        <div class="card-content">
+                            <span class="card-title">{{ $product->title }}</span>
+                            <p>{{ $product->description }}</p>
+                        </div>
+                        <div class="card-action">
+                            <p class="left price">${{ $product->price }}</p>
+                            <a href="{{ route('shop.addToCart', ['id' => $product->id]) }}" class="waves-effect waves-light btn right" role="button">Add to Cart</a>
+                        </div>
+                        <div class="clearfix"></div>
                     </div>
                 </div>
-            </div>
             @endforeach
         </div>
     @endforeach
