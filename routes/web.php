@@ -82,6 +82,11 @@ Route::group(['prefix' => 'user'], function(){
                 'as' => 'admin.users'
             ]);
 
+            Route::post('/admin/users/delete', [
+                'uses' => 'AdminController@deleteUser',
+                'as' => 'admin.deleteUser'
+            ]);
+
             Route::get('/admin/users/{id}', [
                 'uses' => 'AdminController@editUser',
                 'as' => 'admin.editUser'
@@ -90,11 +95,6 @@ Route::group(['prefix' => 'user'], function(){
             Route::post('/admin/users/{id}', [
                 'uses' => 'AdminController@updateUser',
                 'as' => 'admin.updateUser'
-            ]);
-
-            Route::get('/admin/users/delete/{id}', [
-                'uses' => 'AdminController@deleteUser',
-                'as' => 'admin.deleteUser'
             ]);
 
             Route::get('/admin/products', [
@@ -112,6 +112,11 @@ Route::group(['prefix' => 'user'], function(){
                 'as' => 'admin.postCreateProduct'
             ]);
 
+            Route::post('/admin/products/delete', [
+                'uses' => 'AdminController@deleteProduct',
+                'as' => 'admin.deleteProduct'
+            ]);
+
             Route::get('/admin/products/{product_id}', [
                 'uses' => 'AdminController@editProduct',
                 'as' => 'admin.editProduct'
@@ -120,11 +125,6 @@ Route::group(['prefix' => 'user'], function(){
             Route::post('/admin/products/{product_id}', [
                 'uses' => 'AdminController@updateProduct',
                 'as' => 'admin.updateProduct'
-            ]);
-
-            Route::get('/admin/products/delete/{product_id}', [
-                'uses' => 'AdminController@deleteProduct',
-                'as' => 'admin.deleteProduct'
             ]);
 
         });

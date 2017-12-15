@@ -29,11 +29,11 @@ class AdminController extends Controller
         return redirect()->route('admin.users');
     }
 
-    public function deleteUser($id){
-        $user = User::findOrFail($id);
+    public function deleteUser(Request $request){
+        $user = User::findOrFail($request->id);
         $user->delete();
         \Session::flash('flash_message', 'User successfully deleted!');
-        return redirect()->route('admin.users');
+        return redirect()->back();
     }
 
     public function getProducts(){
@@ -72,10 +72,10 @@ class AdminController extends Controller
         return redirect()->route('admin.products');
     }
 
-    public function deleteProduct($product_id){
-        $product = Product::findOrFail($product_id);
+    public function deleteProduct(Request $request){
+        $product = Product::findOrFail($request->product_id);
         $product->delete();
         \Session::flash('flash_message', 'Product successfully deleted!');
-        return redirect()->route('admin.products');
+        return redirect()->back();
     }
 }
